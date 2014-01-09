@@ -7,7 +7,6 @@ do
     v) set -x ;;
   esac
 done
-
 shift $(($OPTIND - 1))
 
 baseimage=$1
@@ -25,7 +24,7 @@ for arg in $@; do
   else
       # Check if $pixelerror contains an integer (it sometimes outputs things like '0 @ 0,0')
       if [ $pixelerror -eq $pixelerror 2> /dev/null ]; then
-          if [ $pixelerror == 0 ]; then 
+          if [ $pixelerror -lt 100 ]; then 
               continue
           fi
           echo "Pixel error: $pixelerror"

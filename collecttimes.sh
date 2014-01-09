@@ -1,6 +1,34 @@
 #!/bin/bash
 
+#
+# Collect timing info and bitmap results of all tests
+# Input: scadfiles.txt
+# Process: <for each VERSION>
+# o Find corresponding *-time.txt result containing processing time
+# o Find corresponding *.png result containing rendering
+#   - If all bitmaps are present and non-zero, compare them
+#
+# o For each entry, output to times.csv:
+#   Thing ID, [time per version], <bitmap changed flag>
+#
+# FIXME
+# o Cache csv (and html) entry per thing (or makefile) ?
+#   - entry is depending on -time.txt and .png
+# o Support multiple entries per thing?
+# 
+#
+
 VERSIONS="2013.06 master refactor"
+FILES=scadfiles.txt
+#FILES=testfiles.txt
+
+# Use -v flag to enable debug mode
+while getopts 'v' c
+do
+  case $c in
+    v) set -x ;;
+  esac
+done
 
 rm -f times.csv
 echo -n "Thing ID" >> times.csv
@@ -28,9 +56,7 @@ cat >> comparison.html <<EOF
       <tbody>
 EOF
 
-for f in `cat allfiles.txt`; do
-#for f in `cat testfiles.txt`; do
-#for f in unpacked/10113/Parametric_glassvasemug/glass.scad; do
+for f in `cat $FILES`; do
   DIR=$(dirname "$f")
   OUTDIR=${DIR#unpacked/}
   THINGID=${OUTDIR%%/*}

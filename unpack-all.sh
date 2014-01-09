@@ -1,9 +1,14 @@
 #!/bin/bash
-rm -f unpack.log
+
 for z in zip/*.zip; do
   id=`basename $z .zip`
-  echo $id
-  mkdir -p unpacked/$id && cd unpacked/$id && unzip -q ../../$z && cd ../..
-  # FIXME: Escape spaces in filenames
-  find unpacked/$id -name "*.scad" >> unpack.log
+  # Only unpacked files that don't already exist
+  if [ ! -d unpacked/$id ]; then
+      echo $id
+      unzip -d unpacked/$id -qo $z
+
+      # Remove spaces in filenames since subsequent makefile doesn't
+      # support that
+      find unpacked/$id -name "* *.scad" -print0 | xargs -0 -n1 sh -c 'mv "$0" ${0// /_}'
+  fi
 done
