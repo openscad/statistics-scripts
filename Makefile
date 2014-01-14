@@ -26,7 +26,8 @@ comparison: times.csv comparison.html
 
 times.csv: $(patsubst %,%.csv,$(patsubst unpacked/%.scad,comparison/%,$(sources)))
 	@echo Creating times.csv
-	@cat $^ > $@
+	@echo "Thing ID, 2013.06, master, refactor, changed" > $@
+	@cat $^ >> $@
 
 comparison.html: $(patsubst %,%.html,$(patsubst unpacked/%.scad,comparison/%,$(sources)))
 	@echo Creating comparison.html
