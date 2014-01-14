@@ -1,0 +1,23 @@
+78071  # OpenCSG
+91496  # OpenCSG
+9860   # OpenCSG
+73464  # OpenCSG
+60692  # OpenCSG
+53965  # OpenCSG
+52555  # OpenCSG
+4137   # OpenCSG
+217391 # OpenCSG
+193892 # OpenCSG
+17143  # OpenCSG
+162932 # OpenCSG
+156056 # OpenCSG
+151302 # OpenCSG
+145357 # OpenCSG
+116987 # OpenCSG
+101343 # OpenCSG
+101313 # OpenCSG
+11748  # OpenCSG
+106704 # "write/Letters.dxf"
+107819 # "write/Letters.dxf"
+132113 # "write/Letters.dxf"
+
