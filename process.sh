@@ -1,5 +1,5 @@
 #
-# Usage: process.sh [-v] <version> <file>
+# Usage: process.sh [-v] <version> <inputfile.scad> <outputfile.png>
 #
 
 # Use -v flag to enable debug mode
@@ -16,7 +16,7 @@ INPUT=$2
 OUTPUT=$3
 
 OPENSCAD=/Users/kintel/Desktop/OpenSCAD-$VERSION.app/Contents/MacOS/OpenSCAD 
-export OPENSCADPATH=/Users/kintel/Desktop/OpenSCAD/Makerbot/customizer-libraries
+export OPENSCADPATH=$PWD/customizer-libraries
 export TIMEFORMAT='%1U'
 
 RESULTDIR=results-$VERSION
