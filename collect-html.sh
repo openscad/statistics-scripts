@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# Usage:
+#   collect-html.sh <png-files>
+#
+
 # Use -v flag to enable debug mode
 while getopts 'v' c
 do
@@ -9,11 +14,22 @@ do
 done
 shift $(($OPTIND - 1))
 
-bitmaps=$@
-
 failed=false
-for b in $bitmaps; do
-    if [ ! -s $b ]; then failed=true; fi
+for b in $@; do
+
+    # results-<version>/<THINGID>
+    [[ $b =~ ^results-([^\/]+)/([[:digit:]]+) ]]
+    VERSION=${BASH_REMATCH[1]}
+    THINGID=${BASH_REMATCH[2]}
+
+    # Check if we should ignore results (e.g. due to refactored version
+    # having different OpenCSG rendering artifacts). NB! only do this 
+    # for manually verified models.
+    if [[ ! `cat things-ignore-$VERSION-bitmaps.txt` =~ (^|[[:space:]])"$THINGID"($|[[:space:]]) ]]; then
+        bitmaps="$bitmaps $b"
+    elif [ ! -s $b ]; then 
+        failed=true;
+    fi
 done
 
 if ! $failed; then
