@@ -25,14 +25,16 @@ for b in $@; do
     # Check if we should ignore results (e.g. due to refactored version
     # having different OpenCSG rendering artifacts). NB! only do this 
     # for manually verified models.
-    if [[ ! `cat things-ignore-$VERSION-bitmaps.txt` =~ (^|[[:space:]])"$THINGID"($|[[:space:]]) ]]; then
+    if [[ ! `cat things-ignore-bitmaps.txt` =~ (^|[[:space:]])"$THINGID"($|[[:space:]]) &&
+          ! `cat things-ignore-$VERSION-bitmaps.txt` =~ (^|[[:space:]])"$THINGID"($|[[:space:]]) ]]; then
         bitmaps="$bitmaps $b"
-    elif [ ! -s $b ]; then 
-        failed=true;
+        if [ ! -s $b ]; then 
+          failed=true;
+        fi
     fi
 done
 
-if ! $failed; then
+if [[ -n "$bitmaps" && ! $failed ]]; then
     result=`./compare-bitmaps.sh $bitmaps 2>&1`
     if [ $? -ne 0 ]; then
         failed=true
@@ -41,7 +43,7 @@ fi
 
 if $failed; then
     echo "<tr>"
-    for b in $bitmaps; do
+    for b in $@; do
         echo "<td><img src=\"$b\" width=\"250\"/></td>"
     done
     echo "</tr>"
