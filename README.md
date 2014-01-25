@@ -13,17 +13,12 @@ As a start, we're downloading and comparing models from Thingiverse.
 
 **Post-processing:**
 * make comparison will build comparison.html and times.csv
-
+* ./createcsv.py will create comparison.csv
 
 
 Notes:
 * To update a single result:
     * rm -r results-<version>/<id>
     * make <version>
-    * collecttimes.sh
-
-* To reimport into Numbers:
-    * drop times.csv into Numbers
-    * copy&paste the resulting table into the main document
-    * Show title and rename to 'times' (remove existing times table)
-    -> this will rebuild the main table
+    * make comparison
+    * ./createcsv.py
