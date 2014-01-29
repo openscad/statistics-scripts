@@ -1,4 +1,5 @@
 sources = $(shell cat scadfiles.txt)
+sources-render = $(shell cat scadfiles-render.txt)
 #sources = $(shell cat testfiles.txt)
 #sources = unpacked/10113/Parametric_glassvasemug/glass.scad
 
@@ -9,6 +10,9 @@ all:
 
 refactor: 
 	$(MAKE) -e version=refactor process
+
+refactor-render: 
+	$(MAKE) -e version=refactor process-render
 
 master:
 	$(MAKE) -e version=master process
@@ -21,6 +25,12 @@ process: $(sources:unpacked/%.scad=results-$(version)/%.png)
 results-$(version)/%.png: unpacked/%.scad
 #	@echo "Processing $< to $@"
 	@./process.sh $(version) $< $@
+
+process-render: $(sources-render:unpacked/%.scad=results-$(version)/%-render.png)
+
+results-$(version)/%-render.png: unpacked/%.scad
+#	@echo "Processing $< to $@"
+	@./process.sh -r $(version) $< $@
 
 comparison: times.csv comparison.html
 
