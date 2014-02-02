@@ -17,10 +17,11 @@ shift $(($OPTIND - 1))
 failed=false
 for b in $@; do
 
-    # results-<version>/<THINGID>
-    [[ $b =~ ^results-([^\/]+)/([[:digit:]]+) ]]
+    # results-<version>/<type>/<THINGID>
+    [[ $b =~ ^results-([^\/]+)/([^\/]+)/([[:digit:]]+) ]]
     VERSION=${BASH_REMATCH[1]}
-    THINGID=${BASH_REMATCH[2]}
+    TYPE=${BASH_REMATCH[2]}
+    THINGID=${BASH_REMATCH[3]}
 
     # Check if we should ignore results (e.g. due to refactored version
     # having different OpenCSG rendering artifacts). NB! only do this 

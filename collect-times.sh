@@ -13,9 +13,10 @@ HTMLFILE=$1
 
 shift
 
-# folder/<THINGID>
-[[ $1 =~ ^[^\/]+/([[:digit:]]+) ]]
-THINGID=${BASH_REMATCH[1]}
+# folder/<type>/<THINGID>
+[[ $1 =~ ^[^\/]+/([^\/]+)/([[:digit:]]+) ]]
+TYPE=${BASH_REMATCH[1]}
+THINGID=${BASH_REMATCH[2]}
 
 echo -n "$THINGID,"
 cat $@ | tr "\n" ","

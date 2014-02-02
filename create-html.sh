@@ -28,10 +28,11 @@ echo "<tbody>"
 
 for f in $@; do
   if [ -s $f ]; then
-      # folder/<THINGID>
-      [[ $f =~ ^[^\/]+/([[:digit:]]+) ]]
-      THINGID=${BASH_REMATCH[1]}
-      FILE=$(basename "$f" .scad)
+      # folder/<type>/<THINGID>
+      [[ $f =~ ^[^\/]+/([^\/]+)/([[:digit:]]+) ]]
+      TYPE=${BASH_REMATCH[1]}
+      THINGID=${BASH_REMATCH[2]}
+      FILE=$(basename "$f" .html)
       echo "<tr><td colspan=\"2\" align=\"center\">$THINGID - $FILE</td></tr><tr>"
       cat $f
   fi
