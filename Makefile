@@ -21,7 +21,7 @@ refactor:
 	$(MAKE) -e version=refactor type=preview process
 
 refactor-render: 
-	$(MAKE) -e version=refactor type=render process-render
+	$(MAKE) -e version=refactor type=render process
 
 master:
 	$(MAKE) -e version=master process
