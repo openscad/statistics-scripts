@@ -1,2 +1,6 @@
 116807 # (Base_for_Customizalbe_Atom.scad) transform empty bbox issue (fixed in master)
 100248 # Exposes a hang-bug (#452) on 2013.06
+626650 # Unknown bug
+68551  # Assert failure
+245843 # NBSP issue
+

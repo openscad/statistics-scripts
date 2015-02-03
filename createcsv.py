@@ -1,14 +1,22 @@
 #!/usr/bin/env python
 
 import csv
+import sys
+
+if len(sys.argv) != 3:
+    print "Usage: createcsv.py <input.csv> <output.csv>"
+    exit(1)
+
+infile = sys.argv[1]
+outfile = sys.argv[2]
 
 # Read popularity database
 jobreader = csv.reader(open('customizer-jobs.csv', 'rb'))
-jobreader.next() # Skipe header
+jobreader.next() # Skip header
 jobdict = {int(k): int(v) for k, v in jobreader}
 
-ifile  = open('times.csv', "rb")
-ofile  = open('comparison.csv', "wb")
+ifile  = open(infile, "rb")
+ofile  = open(outfile, "wb")
 reader = csv.reader(ifile)
 writer = csv.writer(ofile, delimiter=',')
 
@@ -18,7 +26,7 @@ for row in reader:
     if rownum == 0:
         header = row
         header.append('Improvement from 2013.06')
-        header.append('Improvement from master')
+        header.append('Improvement from 2014.03')
         header.append('hide')
         header.append('popularity')
         writer.writerow(row)
