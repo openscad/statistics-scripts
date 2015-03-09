@@ -53,7 +53,7 @@ comparison/%.csv: comparison/%.html $(foreach v, $(versions), results-$(v)/%-tim
 comparison/%.html: $(foreach v, $(versions), results-$(v)/%.png)
 	@echo "$*" | cut -d'/' -f 2     # thingid
 	@mkdir -p `dirname "$@"`
-	@./collect-html.sh $^ > $@
+	@./collect-html.sh $(subst $(rp),\$(rp),$(subst $(lp),\$(lp),$^)) > $(subst $(rp),\$(rp),$(subst $(lp),\$(lp),$@))
 
  #   unpacked/%.scad -> comparison/type/%
 #   comparison/% -> comparison/%.html 
