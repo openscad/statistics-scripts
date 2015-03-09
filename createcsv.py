@@ -32,15 +32,15 @@ for row in reader:
         writer.writerow(row)
     else:
         thingid = row[0] = int(row[0])
-        oldtime = float(row[1])
-        mastertime = float(row[2])
+        reallyoldtime = float(row[1])
+        oldtime = float(row[2])
         newtime = float(row[3])
         changed = row[4] = int(row[4]) != 0
         improvement = (oldtime+0.1)/(newtime+0.1)
+        row.append('{:.1f}'.format((reallyoldtime+0.1)/(newtime+0.1)))
         row.append('{:.1f}'.format(improvement))
-        row.append('{:.1f}'.format((mastertime+0.1)/(newtime+0.1)))
         row.append(not changed and
-                   ((oldtime < 1 and mastertime < 1 and newtime < 1) or
+                   ((reallyoldtime < 1 and oldtime < 1 and newtime < 1) or
                     (improvement >= 0.8 and improvement <= 1.2)))
         if thingid in jobdict: row.append(jobdict[thingid])
         else: row.append(-1)
