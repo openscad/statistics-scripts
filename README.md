@@ -18,10 +18,12 @@ As a start, we're downloading and comparing models from Thingiverse.
 **Processing:**
 
 * make <version> will run OpenSCAD on all files with the given OpenSCAD version
+  We expect to find OpenSCAD-<version>.app in ~/Desktop
+  If any version was updated, rm -r results-<version> first
 
 **Post-processing:**
 
-* make comparison will build comparison.html, times.csv and comparison-preview.csv
+* 'make comparison' will build comparison.html, times.csv and comparison-preview.csv
 
 
 Notes:
